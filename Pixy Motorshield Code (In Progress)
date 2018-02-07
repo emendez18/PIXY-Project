@@ -1,0 +1,42 @@
+#include <SPI.h>
+#include <Pixy.h>
+#include <Wire.h>
+#include <Adafruit_MotorShield.h>
+
+
+Adafruit_MotorShield AFMS = Adafruit_MotorShield();
+Adafruit_DCMotor *myMotor = AFMS.getMotor(1);
+Adafruit_DCMotor *jeffMotor = AFMS.getMotor(2);
+
+Pixy pixy;
+
+void setup() {
+ Serial.begin(9600);
+ Serial.print("Starting...\n");
+ AFMS.begin();
+ pixy.init();
+
+ myMotor->setSpeed(150);
+ myMotor->run(FORWARD);
+
+ jeffMotor->setSpeed(150);
+ jeffMotor->run(FORWARD);
+
+}
+
+void loop() {
+ uint16_t numBlocks;
+ uint16_t sigsDetected;
+ int i;
+
+ uint16_t getBlocks(uint16_t numBlocks=10)
+
+ sigsDetected = Pixy.getBlocks(i);
+
+ if (sigsDetected == 3) {
+      
+
+ }
+ }
+
+}
