@@ -27,15 +27,26 @@ void setup() {
 void loop() {
  uint16_t numBlocks;
  uint16_t sigsDetected;
- int i;
+ uint8_t i;
 
- uint16_t getBlocks(uint16_t numBlocks=10)
+ uint16_t getBlocks(uint16_t numBlocks=5)
 
- sigsDetected = Pixy.getBlocks(i);
+ sigsDetected = Pixy.getBlocks(numBlocks);
 
- if (sigsDetected == 3) {
-      
-
+//detects a signature to go forward
+ if (pixy.blocks[sigsDetected].signature == 1) {
+  myMotor->run(FORWARD);
+  jeffMotor->run(BACKWARD);
+ }
+ //detects a signature to turn left
+ else if (pixy.blocks[sigsDetected].signature == 2) {
+  // need to establish an x distance so it doesn't turn right when it detects the color
+    if (pixy.blocks[
+ }
+ //detects a signature to turn right
+ else if (pixy.blocks[sigsDetected].signature == 3) {
+  //same thing here with establishing x distance away
+  if (pixy.blocks[
  }
  }
 
