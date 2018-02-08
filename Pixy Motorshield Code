@@ -17,10 +17,7 @@ void setup() {
  pixy.init();
 
  myMotor->setSpeed(150);
- myMotor->run(FORWARD);
-
  jeffMotor->setSpeed(150);
- jeffMotor->run(FORWARD);
 
 }
 
@@ -29,27 +26,27 @@ void loop() {
  uint16_t sigsDetected;
  uint8_t i;
 
- uint16_t getBlocks(uint16_t numBlocks=5)
-
- sigsDetected = Pixy.getBlocks(numBlocks);
+ sigsDetected = pixy.getBlocks();
 
 //detects a signature to go forward
  if (pixy.blocks[sigsDetected].signature == 1) {
   myMotor->run(FORWARD);
-  jeffMotor->run(BACKWARD);
-  Serial.print("Moving Forward);
+  jeffMotor->run(FORWARD);
+  Serial.println("Moving Forward");
  }
  //detects a signature to turn left
  else if (pixy.blocks[sigsDetected].signature == 2) {
   // need to establish an x distance so it doesn't turn right when it detects the color
-    if (pixy.blocks[
-    Serial.print("Turning Right");
+    myMotor->run(FORWARD);
+    jeffMotor->run(BACKWARD);
+    Serial.println("Turning Right");
  }
  //detects a signature to turn right
  else if (pixy.blocks[sigsDetected].signature == 3) {
   //same thing here with establishing x distance away
-  if (pixy.blocks[
-  Serial.print("Turning Left);
+   myMotor->run(BACKWARD);
+  jeffMotor->run(FORWARD);
+  Serial.println("Turning Left");
  }
 
 }
