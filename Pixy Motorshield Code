@@ -42,12 +42,13 @@ void loop() {
  else if (pixy.blocks[sigsDetected].signature == 2) {
   // need to establish an x distance so it doesn't turn right when it detects the color
     if (pixy.blocks[
+    Serial.print("Turning Right");
  }
  //detects a signature to turn right
  else if (pixy.blocks[sigsDetected].signature == 3) {
   //same thing here with establishing x distance away
   if (pixy.blocks[
- }
+  Serial.print("Turning Left);
  }
 
 }
