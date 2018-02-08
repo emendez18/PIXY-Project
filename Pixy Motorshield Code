@@ -16,9 +16,6 @@ void setup() {
  AFMS.begin();
  pixy.init();
 
- myMotor->setSpeed(150);
- jeffMotor->setSpeed(150);
-
 }
 
 void loop() {
@@ -29,24 +26,31 @@ void loop() {
  sigsDetected = pixy.getBlocks();
 
 //detects a signature to go forward
- if (pixy.blocks[sigsDetected].signature == 1) {
+ if (pixy.blocks[sigsDetected].signature == 1)  { //&& pixy.blocks[sigsDetected].x == 150) 
+  myMotor->setSpeed(150);
   myMotor->run(FORWARD);
+  jeffMotor->setSpeed(150);
   jeffMotor->run(FORWARD);
   Serial.println("Moving Forward");
+  delay(50);
  }
  //detects a signature to turn left
- else if (pixy.blocks[sigsDetected].signature == 2) {
+ else if (pixy.blocks[sigsDetected].signature == 2) { //&& pixy.blocks[sigsDetected].x == 150) 
   // need to establish an x distance so it doesn't turn right when it detects the color
+    myMotor->setSpeed(100);
     myMotor->run(FORWARD);
+    jeffMotor->setSpeed(100);
     jeffMotor->run(BACKWARD);
     Serial.println("Turning Right");
+    delay(50);
  }
  //detects a signature to turn right
- else if (pixy.blocks[sigsDetected].signature == 3) {
+ else if (pixy.blocks[sigsDetected].signature == 3) { //&& pixy.blocks[sigsDetected].x == 150) 
   //same thing here with establishing x distance away
    myMotor->run(BACKWARD);
   jeffMotor->run(FORWARD);
   Serial.println("Turning Left");
+  delay(50);
  }
 
 }
