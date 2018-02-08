@@ -37,6 +37,7 @@ void loop() {
  if (pixy.blocks[sigsDetected].signature == 1) {
   myMotor->run(FORWARD);
   jeffMotor->run(BACKWARD);
+  Serial.print("Moving Forward);
  }
  //detects a signature to turn left
  else if (pixy.blocks[sigsDetected].signature == 2) {
