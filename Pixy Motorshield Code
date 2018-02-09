@@ -22,14 +22,17 @@ void loop() {
  uint16_t numBlocks;
  uint16_t sigsDetected;
  uint8_t i;
-
+//red = sig 1
+//yellow = sig 2
+//green = sig 3
+//blue = sig 4
  sigsDetected = pixy.getBlocks();
 
 //detects a signature to go forward
- if (pixy.blocks[sigsDetected].signature == 1)  { //&& pixy.blocks[sigsDetected].x == 150) 
-  myMotor->setSpeed(150);
+ if (pixy.blocks[sigsDetected].signature == 3)  { //&& pixy.blocks[sigsDetected].x == 150) 
+  myMotor->setSpeed(100);
   myMotor->run(FORWARD);
-  jeffMotor->setSpeed(150);
+  jeffMotor->setSpeed(100);
   jeffMotor->run(FORWARD);
   Serial.println("Moving Forward");
   delay(50);
@@ -45,12 +48,18 @@ void loop() {
     delay(50);
  }
  //detects a signature to turn right
- else if (pixy.blocks[sigsDetected].signature == 3) { //&& pixy.blocks[sigsDetected].x == 150) 
+ else if (pixy.blocks[sigsDetected].signature == 4) { //&& pixy.blocks[sigsDetected].x == 150) 
   //same thing here with establishing x distance away
    myMotor->run(BACKWARD);
   jeffMotor->run(FORWARD);
   Serial.println("Turning Left");
   delay(50);
  }
+  else if(pixy.blocks[sigsDetected].signature == 1) {
+    myMotor->setSpeed(0);
+    jeffMotor->setSpeed(0);
+    Serial.println("STOP!");
+    delay(50);
+  }
 
 }
