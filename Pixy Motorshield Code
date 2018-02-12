@@ -29,35 +29,72 @@ void loop() {
  sigsDetected = pixy.getBlocks();
 
 //detects a signature to go forward
- if (pixy.blocks[sigsDetected].signature == 3)  { //&& pixy.blocks[sigsDetected].x == 150) 
-  myMotor->setSpeed(100);
-  myMotor->run(FORWARD);
-  jeffMotor->setSpeed(100);
-  jeffMotor->run(FORWARD);
+ if (pixy.blocks[sigsDetected].signature == 3)  { 
+    if (pixy.blocks[sigsDetected].x >= 120 && pixy.blocks[sigsDetected].x <= 190) {
+      myMotor->setSpeed(125);
+      myMotor->run(FORWARD);
+      jeffMotor->setSpeed(125);
+      jeffMotor->run(FORWARD);
+    }
+    else {
+      myMotor->setSpeed(85);
+      myMotor->run(FORWARD);
+      jeffMotor->setSpeed(85);
+      jeffMotor->run(FORWARD);
+    }
+  
   Serial.println("Moving Forward");
   delay(50);
  }
- //detects a signature to turn left
- else if (pixy.blocks[sigsDetected].signature == 2) { //&& pixy.blocks[sigsDetected].x == 150) 
+
+
+ else if (pixy.blocks[sigsDetected].signature == 2) { 
   // need to establish an x distance so it doesn't turn right when it detects the color
-    myMotor->setSpeed(100);
-    myMotor->run(FORWARD);
-    jeffMotor->setSpeed(100);
-    jeffMotor->run(BACKWARD);
+    if (pixy.blocks[sigsDetected].x >= 220) {
+      myMotor->setSpeed(75);
+      myMotor->run(FORWARD);
+      jeffMotor->setSpeed(75);
+      jeffMotor->run(BACKWARD);
+    }
+    else {
+      myMotor->setSpeed(85);
+      myMotor->run(FORWARD);
+      jeffMotor->setSpeed(85);
+      jeffMotor->run(BACKWARD);
+    }
+    
     Serial.println("Turning Right");
     delay(50);
  }
+
+ 
  //detects a signature to turn right
- else if (pixy.blocks[sigsDetected].signature == 4) { //&& pixy.blocks[sigsDetected].x == 150) 
+ else if (pixy.blocks[sigsDetected].signature == 4) {  
   //same thing here with establishing x distance away
-   myMotor->run(BACKWARD);
-  jeffMotor->run(FORWARD);
+  if (pixy.blocks[sigsDetected].x < 75) {
+     myMotor->setSpeed(75);
+     myMotor->run(BACKWARD);
+     jeffMotor->setSpeed(75);
+     jeffMotor->run(FORWARD);
+  }
+  else {
+    myMotor->setSpeed(0);
+    jeffMotor->setSpeed(0);
+  }
+
   Serial.println("Turning Left");
   delay(50);
  }
   else if(pixy.blocks[sigsDetected].signature == 1) {
-    myMotor->setSpeed(0);
-    jeffMotor->setSpeed(0);
+    if (pixy.blocks[sigsDetected].x >= 120 && pixy.blocks[sigsDetected].x <= 190) {
+      myMotor->setSpeed(0);
+      jeffMotor->setSpeed(0);
+    }
+    else {
+      myMotor->setSpeed(125);
+      jeffMotor->setSpeed(125);
+    }
+   
     Serial.println("STOP!");
     delay(50);
   }
